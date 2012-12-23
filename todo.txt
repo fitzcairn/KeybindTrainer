@@ -1,0 +1,484 @@
+
+
+Next Steps:
+
+ - UPDATE ALL UNIT TESTS, particular to use my new shared libraries.
+
+
+ - TEST with Dominos, BindPad, etc
+
+ - TEST Custom Trials!
+
+ - Move test/TestEnv to my new util library!  That should be shared
+across all my addons.
+
+
+
+ - Have Mary test, push update.
+
+
+   ALSO: ADD BINDS SPECIFICALLY FOR SHAMAN TOTEM SETS!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BUGS FIXED:
+ X Not sure how, but actions without keybinds are recieving
+keybinds. (answer: keybinds kept for actionbars that aren't visible)
+ X Help scrollbars do weird shit when clicked. (fixed)
+ X !! Figure out how to order menu items alpha !! (fixed by making order in menu reflect order added)
+   X There are bugs around the menu, solve this.
+ X Stats bug Mary found.
+ X When deleting the last custom trial, the edit trial button stays
+lit (and does nothing).  disable this.
+ X When running continuously, do NOT reset misses until very end.
+   Show aggregate misses to user!
+ X HUGE BUG: when deleting and re-creating trials, sometimes actions
+get null'd out, not sure why?!?!!?
+   o Repro: Create custom trial, delete it, re-create it, run it, error.
+ X Issue with companion summoning--see Run.lua around 117 (this is now
+handled, Run.lua:212)
+ X Randomize bind order doesn't work for default trials.
+ X When there is nothing on the first bar, the simulation crashes
+ X Random delay not very random. (yeah it is, looks good)
+ X Mousebuttons working correctly??? (yes!!)
+ X TEST COMBAT TAINT (appears to be no problem)
+ X Keybind bug--when changing keybinds and restarting the trial,
+   both the old and new keybinds are maintained for the action.
+   X Solve via unit tests!!!!!!
+ X Weirdness in how binds are mapped to action slots.  Check it out
+   on donuts--for some reason binds are assigned to slots where they
+   don't exist.
+   X Fixed--was picking up action buttons from a previous spec.
+ X Allow redefined keybinds to get picked up for every trial start.
+   o This appears to be happening correctly
+ X Fix what happens when icon size is too large to display entire 
+   multi-action tuple on screen--clip icons.
+   o Clipping is bad, will display, but normalized behavior between
+     random and non.
+ X Weird issue with keybind map building.  Try moving
+   binds around and seeing what gets saved in the map.
+ X BUGS DUE TO 4.0.1 
+   o Issues fixed:
+     X Cooldown sizes are fucked!  Something new as of 4.0.1 (hack fix)
+     X Bug in how first alt- bind affects trial?? (fixed--was an error in iterator)
+     X Running custom trials generates error.
+     X Major binds problem??!?!?! (problem was my java-style iterators were fucked.)
+     X Icons don't respect top of area when doing random positions--can overlap. (Blizz redid their coords, fuck)
+     X For some reason, the first bind on the bar is skipped.  ???
+     X No icons on stats graph
+     X Clicking "Save" with empty custom trial input box gives error.
+     X Highlighting on the dropdown menu is off. (not a huge deal, resolving)
+     X Stats has issues--displaying stats is broken.
+
+
+
+TODOs DONE:
+ X Spellcheck localization text file
+ X Change config defaults to something that make sense. (cooldown!!)
+ X UI fix: add names to unrecognized spells.
+ X Turn off KT_Print() output
+ X Set addon to hidden by default
+ X Add Config tests.
+ X Fix up ActionTuple tests.
+ X Add JSON tests for UTF-8 compliance.
+ X Fix up all comments in files
+   X Add liscence!
+ X Get rid of all print() calls
+ X CONSTRUCT MORE DEFAULT TRIALS
+ X CONSTRUCT CUSTOM TRIALS TO SHIP WITH ADDON (added one)
+ X Redo/expand CUSTOM TRIAL SECTION OF HELP DOCUMENT (everything else
+has been updated)
+   o Thoroughly describe behavior of custom trials.  Ex: what happens
+when spell name not found on your bars?  When spell names collide?
+ X USE UTF8 STRING SUB FROM HERE:
+   http://wowprogramming.com/snippets/UTF-8_aware_stringsub_7
+   (This doesn't appear to be an issue--tested with utf chars)
+ X Fix Custom Trial boxes--widths on shit are wrong
+ X Add string during trial reminding user to move mouse out of
+   window to stop trial. (eh, decided not to do this)
+ X add a "skip" button in the trial window.
+ X Come up with a good versioning system, put version into title bar
+ X update test_Stats to work with new action/actionlist API
+ X WRITE About file!
+ X Add an index to the doc directory for readers outside of the game;
+   make javascript that reads in the lua help and displays it. (not possible)
+ X WRITE help file!  <<<---- FINISH
+ X FINISH INTEGRATING JSON4LUA INTO MY ADDON.
+   o REDEFINE ADDON LANGUAGE
+   o Compare with old parser?
+ X Finish revamping tests.  Currently working on test_Run.lua, meed to
+do Trials, Stats also.
+ X Rewire the rest of the addon around the new action record format.
+ X UPDATE UNIT TESTS FOR CUSTOM PARSER
+ X Finish unit tests for Stats functionality.
+ X Add slider for icon size!!
+ X Moved text to localization file
+ X Re-add borders around config blocks, and adjust to look good.
+ X Add button to add a custom trial
+ X Add a button to view statistics for this character
+   -- disabled for now, need to find home.
+ To Display block:
+ X Add slider for time between icons shown (in seconds)
+ X    -> Decided on input box for this, and added it.
+ X Add checkbox to randomize times between actions shown! (disables above option)
+ X Re-adjust minimum width/height for addon!
+ X Add a function that populates the config map with defaults when
+   the addon loads
+ X Fix bug in selecting random checkbox.
+ X Allow users to specify random keybind ordering
+ X Test layout at different resolutions.
+
+ X Tie in Config widgets to trial behavior
+ X Finish defining default trials
+ X Fix the fucking button mouseover action = mouseout bullshit -- FIXED
+ X Add unit tests for functionality--this is getting nuts. -- ADD MORE
+ X Add popup and ability to add custom trials!
+ X Update all unit tests now that spaces are normalized. !!
+ X Add visual cue for the GCD between actions in a multi-action tuple.
+ X Add Peek() to Trial iterator to see if this is the second to last
+   element.  That way we don't waste one last trial delay at end of trial.
+ X Add ability to save custom trials to SavedVariables
+   X As part of this, REFACTOR Defs!!  Put all Config functions in the
+     same scope.
+   X Seperate scope for config vars
+   X New scope for constants
+   X New scope for custom trials
+ X RENAME/SCOPE DEBUG FUNCTIONS THAT WE WILL KEEP
+   X Replace prints everywhere with self:print
+ X Add a KT_debug() global to the Defs module.  Just print() with a flag to turn it on and off.
+ X TEST ability to run custom trials with multi-actions
+ X !! Fix setting config widgets from custom trials on trial start !!
+   o Right now, duration is broken for "random"--is random implemented??
+   o Handle both "random" and random in input.
+ X HANDLE MACRO NAMES, PET ACTIONS, ETC WHEN BUILDING BIND MAP
+   o Need to allow these to be in custom trials!
+ X Add overlays for macros to add macro names
+ X Allow custom trials to use macros.
+ X Add overlay for visual feedback on missed binds/slots with no bind.
+ X Add overlays to the buttons when binds are correct and wrong.
+ X Pass errors for parsing saved trials at load time to user?
+   o Hmm, or forgive them? -- Changes to forgive them.
+ X !!!!! PROBLEM: on login, saved variables don't load!!!!!
+   o Fixed--was a problem with the parser disallowing macros since
+they load after KT.
+ X Custom trial descriptions not showing in tooltips!!!!!!
+   o Fixed
+ X Set sane limits for icon size 
+ X Custom trial allows empty string for name
+ X Macro names not shown in stats window on icons
+ X What to do with the line?  If the user's time was above average,
+   the line doesn't make sense.
+   o Fixed this by having three graphs--last run time, avg time, avg misses
+ X GET STAT SLIDERS WORKING, TEST!!!!!!
+ X Update Stat window layout--make it look good.
+ X Make "Clear" stats button work
+ X Rearrange UI, put config at top AND bottom
+ X Add trial stat info string to bottom of display window!!
+ X Put title string in Localization
+ X Add "About" info.
+ X Add button to start trial
+ X Put error strings in Localization!
+ X Make title localizable, and add version to title.
+ X Refactor out widget library from widget config.
+ X Refactor--KeyboardTrainer => KeybindTrainer
+ X Add about frame and button.
+ X Create "Help" button in main frame, and open a SimpleHTML frame
+   with the scrollable help in it.
+ X Make help file localizable--read it in and use SetText in Config
+ X Hook up close button to hide frame
+ X Add help button, make it show frame
+ X Start adding functionality to running trials
+   X Per-bind timer in addition to overall timer
+ X Re-organize ui--put Display Options at the bottom
+ X Automatically scale parser window to fit ALL error strings
+ X Add corner pull icon for resize
+ X Add command line commands
+ X Add minimap icon
+ X Get a picture for the minimap icon.
+ X Add option to disable minimap icon. (decided not to do this)
+ X Add better information to toc
+ X Why aren't stats saved across sessions per-character?!?!?!
+ X Fill in all localization strings.
+ X Implement a full test env emulating blizzard functions so I can
+   do more unit testing.
+ X Unit tests for everything
+ X !! ANOTHER BUG !!
+
+Need to do a FULL SCAN of keybinds to allow for custom trials to work.
+
+Visible scans are only useful for the default trials!  GAY!
+
+ X !!! HUGE BUG !!!
+
+PROBLEM:
+Different spells/macros/etc on the action bar can share the same
+name. :( This fucks up all sorts of things.
+
+SOLUTION:
+In short, we need to rearrange how bind information is stored.
+
+Before:
+slot_to_binds, name_to_binds, name_to_type, texture_cache = ...
+
+After:
+action_info = {
+               id = {
+                     names = {},
+                     binds = {},
+                     type  = spell|macro|etc...
+                     texture = "/path/to" text
+                    }              
+              }
+Note that action_info is never cleared, just updated.
+
+slot_to_binds = {
+                slot = id block from above
+                }
+
+name_to_ids = {
+              name = { ..id blocks from above.. }
+              }
+
+After this change, need to:
+  - Update Action objects to refer to ids, not names in all functions.
+    Then update tests.
+  - Update parser to do the right thing when parsing names/spell ids
+    o If conflict with names, throw an error and ask for ids.  Add tests.
+    o Update parser to be able to take in other action type ids (macros,
+      equimpent sets, etc).  Add tests.
+
+
+
+
+-- OLD Spec for how trials are specified --
+
+trial
+   [ "name", ("desc",)? [ trial_set ] (, delay)? ]
+trial_set
+   [ multi_action_tuple ] (, trial_set)?
+   action_tuple (, trial_set)?
+multi_action_tuple
+   action_tuple (, multi_action_tuple)?
+action_tuple
+   [ "action" (, cooldown)? ]
+action
+   string
+   spell:int
+   item:int
+cooldown
+   float
+   nil (if not present, use configured delay value)
+name
+   string  
+desc
+   string  
+delay
+   float
+   "random"
+   nil (if not present, use configured delay value)
+string
+   "value"
+
+
+EBNF: 
+
+trial = "[" name "," ("tooltip" ",") "[" trial_set "]" ("," delay) "]"
+trial_set = "[" multi_action_tuple "]" ("," trial_set) | action_tuple ("," trial_set)
+multi_action_tuple = action_tuple ("," multi_action_tuple)
+action_tuple = "[" "action" ("," cooldown) "]"
+action = string | "spell:" int | "item:" int
+delay = float | "random" | ui
+cooldown = float | ui
+name = string
+tooltip = string
+ui = value from addon interface
+
+
+
+-- NEW EBNF: ---
+
+trial = '{' name ',' binds [gcd ','] [tooltip ','] '}'
+binds = '"binds":[' trial_set ']'
+trial_set = '[' action_tuple {',' action_tuple} ']' | action_tuple
+action_tuple = '{action:' action [',' cooldown] '}'
+action = string | 'spell:' int | 'item:' int
+cooldown = '"cd":' float | '"cd":"random"'
+gcd = '"gcd":' float
+name = '"name":' string
+tooltip = '"desc":' string
+string = '"' (*any sequence of JSON-legal characters*) '"'
+
+trial = '{' name ',' binds [gcd ','] [tooltip ','] '}'
+binds = '&quot;binds&quot;:[' trial_set ']'
+trial_set = '[' action_tuple {',' action_tuple} ']' | action_tuple
+action_tuple = '{action:' action [',' cooldown] '}'
+action = string | 'spell:' int | 'item:' int
+cooldown = '&quot;cd&quot;:' float | '&quot;cd&quot;:&quot;random&quot;'
+gcd = '&quot;gcd&quot;:' float
+name = '&quot;name&quot;:' string
+tooltip = '&quot;desc&quot;:' string
+string = '&quot;' (*any sequence of JSON-legal characters*) '&quot;'
+
+
+
+
+
+Basic Example: 
+[ "basic",
+  [
+    [ "Spell" ],
+    [ spellid:1234 ]
+  ]
+]
+
+Complex Example:
+[ "complex example",
+  "description goes here!",
+  [
+    [ 
+      [ "Spell 1", 1.2 ], [ "Spell 2", 1.3], [ "spell:1232", 2.3 ]
+    ],
+    [ "Spell 3" ]
+  ],
+  12.3
+]
+
+    
+
+
+
+-- Spec for the addon --
+
+Feature list:
+
+ - Fail keybinds if. . .
+   o Allow N misses (configurable) before failing
+   o Allow M seconds (configurable) before failing
+
+ - Keep stats per type of trial. Stats instanced per character.
+   o Stats enabled/disabled by checkbox.
+   o Types of stats:
+     - Time per trial, kept over all trials.
+       o Incomplete trials not counted here.
+       o Continuous trials not kept here.
+     - Amt of time per Action/ActionGroup.
+     - # Misses by Action/ActionGroup.
+   o Be able to show trends?  Would this require a graph?
+   o Keep personal bests!
+     - When a best is achieved, pop a dialog box with congrats!
+       o Dialog box should allow reporting to party/guild/whisper chat!   
+
+ - What Trial to run. Can select from dropdown . . .
+   o Standard Keyboard Trainer Trial (Selected by default)
+     - If selected, following config options are shown:
+       o Run continuously?
+       o Keep stats?
+       o Randomize ordering (check box)
+       o All action bars
+       o Specific action bars (check boxes)
+       o Randomize position (check box)
+   o A saved KeyboardTrainer Trial
+     - Dropdown of saved trials.  If selected, following config options
+       are shown:
+       o Run continuously?
+       o Keep stats?
+       o Randomize ordering (check box)
+       o Randomize position (check box)
+
+ - Ability to paste in new trials and save them.
+   o Simple language (JSON), just a list of spells.
+   o Allows grouping together of actions to appear together,
+     i.e.:  ... Spell0, [Spell1, Spell2], Spell3 ...
+   o Spells that are not keybound will time out.
+   o Paste UI: textbox for pasting, textbox to name.
+   o All trials saved to account, not to character.
+
+
+Interface:
+
+ - Play area initially empty except for two buttons:
+   o Start trial.  On click, will start the selected trial.
+     Disabled until a trial is selected
+   o View stats On click, will display the stats dialog box.
+
+ - Put a button in the middle of play area to start trial.  Mouseout
+   of play area to stop trial.
+   o Need to solve the mouseover icon == mouseout on the panel tho.
+
+ - On trial complete, text message shown in the middle of play area.
+   o Also statistics on trial if selected above.
+   o Normal two buttons will be displayed.
+
+ - Keep the resizable/movable aspect.
+
+ - All config at the top of the addon panel.
+
+ - Only config popup: Add new Trial.
+
+ - Other popups:
+   o Personal best achieved
+   o Stats viewer.
+
+ - Tooltips required over all config options to explain.
+
+
+Next steps (in order):
+
+- Build out UI
+  X Padded window for icons.
+  X Resizable
+    o TODO: ADD CORNER ICON TO SHOW RESIZABLE!
+  X Draggable only on grabbing title bar
+  X Borders everywhere.
+  X Correct textures everywhere.
+  o Timer window with border.
+  X Title bar with title.
+  o Working buttons in config bar for checking off stuff, dropdowns to
+    select, etc.
+  o Stats reporting window.
+    - Top times for run
+    - Where the last run fell in the list of top times.
+    - Most missed ability in run
+
+
+- Build out config UI.
+  o Use a seperate LUA file for this?  Or another addon file?
+  o Build dropdowns (empty for now) for traces to run.
+  o Pop-up window for pasting in new KeyboardTraces (name?)
+
+- Design full functionality and write out a spec.
+  o What's going to be included?  What's getting cut?
+  o Rename?
+
+- Add ability to save statistics to user's saved variables.
+
+- Add /commands
+
+- Add animation for fade in/fade out
+
+- Add advance timeout--if they don't get it in X seconds, advance
+
+- Add mistake advance--if they don't get it in X tries, advance
+
+
+
+

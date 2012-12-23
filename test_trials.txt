@@ -1,0 +1,45 @@
+[ "e", [[ "Auto Attack" ],[ "Auto Attack" ]] ]
+[ "d", [[ "Auto Attack" ],[ "Auto Attack" ]] ]
+[ "a", [[ "Auto Attack" ],[ "Auto Attack" ]] ]
+[ "c", [[ "Auto Attack" ],[ "Auto Attack" ]] ]
+
+
+
+[ "b", [[ "Auto Attack" ],[ "Find Treasure" ],[ "Auto Attack" ]] ]
+
+
+[ "multi", [   [[ "Auto Attack", 0.2 ],[ "Find Treasure", 4 ],["Stoneform", 1]], ["Auto Attack"]  ]    ]
+
+[ "multi_delay", [   [[ "Auto Attack", 0.2 ],[ "Find Treasure", 4 ],["Stoneform", 1]], ["Auto Attack"]  ], 0.5]
+
+[ "multi_delay_rand", [   [[ "Auto Attack", 0.2 ],[ "Find Treasure", 4 ],["Stoneform", 1]], ["Auto Attack"]  ], "random"]
+
+[ "multi_macro", [   [[ "Auto Attack", 0.2 ],[ "RELOAD", 4 ],["Stoneform", 1]], [["Auto Attack"], ["Find Treasure"]]  ]    ]
+
+[ "nobind", [[[ "wowlua" ],["Dodge"]]] ]
+
+
+[ "multi_delay_BIG", [   [[ "Auto Attack", 0.2 ],[ "Find Treasure", 4 ],["Stoneform", 1],["Stoneform", 1],["Stoneform", 1],["Stoneform", 1],["Stoneform", 1]], ["Auto Attack"]  ], "random"]
+
+
+
+NEW STYLE:
+
+{"name":"Rogue: Cloak and Vanish", "gcd":1.5, "binds":[{"action":"Stealth"}, [{"action":"Cloak of Shadows", "cd":0}, {"action":"Vanish"}]]}
+
+
+
+{"name":"basic","binds":[{"action":"Auto Attack"},{"action":"Auto Attack"}]}
+{"name":"basic","binds":[{"action":"RE"},{"action":"RE"}]}
+
+
+{"desc": "This is a very cool trial!", "name":"basic_desc","binds":[{"action":"Auto Attack"},{"action":"Auto Attack"}]}
+
+{"name":"basic_unknown","binds":[{"action":"Unknown"},{"action":"Attack"}]}
+
+
+{"name":"basic_multi_unkown", "desc":"Multi-action test.", "binds":[{"action":"Auto Attack"},[{"action":"Auto Attack"},{"action":"Unknown"},{"action":"Auto Attack"}]]}
+
+
+
+
